@@ -5,14 +5,33 @@
  */
 package Menu;
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import java.sql.*;
+import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
+import java.sql.ResultSet;
 /**
  *
  * @author levat_000
  */
 public class Reports extends javax.swing.JFrame {
- String [] listModel ={ "Appetizers", "burgers", "Fries", "ect.."} ;
-
+ //String [] listModel ={ "Appetizers", "burgers", "Fries", "ect.."} ;
+ private static final String DataBase = "org.sqlite.JDBC";
+    private static final String JDBCThinger = "jdbc:sqlite:";
+    private static String DBName = "E:\\411project\\Gouglersville-\\Gouglersville\\src\\Menu\\GouglersvilleMenu.db"; 
+    Connection connect = null;
+    Statement searchstatement = null;
+    ResultSet rs;
     /**
      * Creates new form Reports
      */
@@ -43,7 +62,7 @@ public class Reports extends javax.swing.JFrame {
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         all = new javax.swing.JCheckBox();
@@ -73,7 +92,7 @@ public class Reports extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -84,7 +103,7 @@ public class Reports extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(table);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Inventory Reporting ");
@@ -98,6 +117,11 @@ public class Reports extends javax.swing.JFrame {
         stocked.setText("Stocked Items");
 
         sold.setText("Sold Items");
+        sold.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                soldActionPerformed(evt);
+            }
+        });
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] menuList = { "All", "Appetizers", "Burgers", "Fries","Wings",
@@ -191,7 +215,7 @@ public class Reports extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(stocked)))))
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,33 +239,31 @@ public class Reports extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))))
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(555, 555, 555))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(125, 125, 125))
         );
 
         pack();
@@ -253,6 +275,60 @@ public class Reports extends javax.swing.JFrame {
 
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+public void connectBook()
+{
+     try {
+Class.forName(DataBase);
+connect = DriverManager.getConnection(JDBCThinger + DBName);
+searchstatement = connect.createStatement();
+     }
+  catch(SQLException e)
+    {
+    }    catch (ClassNotFoundException ex) {
+             Logger.getLogger(Reports.class.getName()).log(Level.SEVERE, null, ex);
+         }
+}
+public void closeConnect ()
+{
+         try {
+             rs.close();
+             searchstatement.close();
+             connect.close();
+         } catch (SQLException ex) {
+             Logger.getLogger(Reports.class.getName()).log(Level.SEVERE, null, ex);
+         }
+}
+    private void soldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soldActionPerformed
+ try {
+             
+
+             connectBook();
+
+             ResultSet rs = searchstatement.executeQuery("Select * from burgers ");
+                   
+             
+             table.setModel(DbUtils.resultSetToTableModel(rs));
+             
+             while ( rs.next() ) {
+
+                 int count = rs.getInt("count");
+                 String  Burger_ID = rs.getString("Burger_ID");
+                 
+                
+                 
+                 closeConnect();
+                 
+                 
+                 
+                 
+                 
+                 
+        
+    }                                        
+         } catch (SQLException ex) {
+             Logger.getLogger(Reports.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    }//GEN-LAST:event_soldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -307,9 +383,9 @@ public class Reports extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JCheckBox sold;
     private javax.swing.JCheckBox stocked;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }
