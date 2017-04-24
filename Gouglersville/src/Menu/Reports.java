@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package Menu;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -20,28 +22,47 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import net.proteanit.sql.DbUtils;
 import java.sql.ResultSet;
+import javax.sql.rowset.CachedRowSet;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableModel;
+import java.util.List;
+import javax.swing.event.*;
+import javax.swing.event.TableModelListener;
 /**
  *
  * @author levat_000
  */
-public class Reports extends javax.swing.JFrame {
+public class Reports extends javax.swing.JFrame 
+{
  //String [] listModel ={ "Appetizers", "burgers", "Fries", "ect.."} ;
  private static final String DataBase = "org.sqlite.JDBC";
     private static final String JDBCThinger = "jdbc:sqlite:";
     private static String DBName = "E:\\411project\\Gouglersville-\\Gouglersville\\src\\Menu\\GouglersvilleMenu.db"; 
     Connection connect = null;
     Statement searchstatement = null;
-    ResultSet rs;
-    /**
+    ListSelectionListener listSelectionListener;
+    //{
+    // @Override
+    // public void valueChanged(ListSelectionEvent e) {
+      //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     //}
+ //};
+//ResultSet rs;
+    ResultSet rs; 
+    DefaultListModel tableNames = new DefaultListModel();
+    /**DefaultListModel dlmTables = new DefaultListModel();
      * Creates new form Reports
      */
     public Reports() {
+        
        
 
 
         initComponents();
+       startJlist();
        
-
+tablelist.addListSelectionListener(listSelectionListener);
 
     }
     
@@ -69,14 +90,14 @@ public class Reports extends javax.swing.JFrame {
         stocked = new javax.swing.JCheckBox();
         sold = new javax.swing.JCheckBox();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        tablelist = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jFormattedTextField2 = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        ReturntoMain = new javax.swing.JButton();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -123,13 +144,9 @@ public class Reports extends javax.swing.JFrame {
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] menuList = { "All", "Appetizers", "Burgers", "Fries","Wings",
-                "Dinner Entrees", "Sides", "Extras", "Wraps" , "ect.." };
-            public int getSize() { return menuList.length; }
-            public String getElementAt(int i) { return menuList[i]; }
-        });
-        jScrollPane2.setViewportView(jList1);
+        tablelist.setModel( tableNames);
+        tablelist.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(tablelist);
 
         jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
@@ -160,13 +177,18 @@ public class Reports extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton1.setText("Run Report");
         jButton1.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(40, 129, 240)));
-
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton2.setText("Return to Main Menu");
-        jButton2.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(40, 129, 240)));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        ReturntoMain.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ReturntoMain.setText("Return to Main Menu");
+        ReturntoMain.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(40, 129, 240)));
+        ReturntoMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReturntoMainActionPerformed(evt);
             }
         });
 
@@ -183,38 +205,38 @@ public class Reports extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(52, 52, 52)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 440, Short.MAX_VALUE)
+                        .addComponent(ReturntoMain)
+                        .addGap(34, 34, 34))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(26, 26, 26)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(all)
+                                .addGap(46, 46, 46))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(233, 233, 233)
+                                        .addComponent(jButton1))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(60, 60, 60)
+                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(35, 35, 35)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(stocked)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(sold)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(26, 26, 26)
+                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(57, 57, 57)
                         .addComponent(jLabel5)
                         .addGap(47, 47, 47)
-                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(0, 0, Short.MAX_VALUE)
-                            .addComponent(jButton2)
-                            .addGap(34, 34, 34))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(all)
-                                    .addGap(59, 59, 59)
-                                    .addComponent(sold)
-                                    .addGap(46, 46, 46))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addGap(233, 233, 233)
-                                            .addComponent(jButton1))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                            .addGap(60, 60, 60)
-                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGap(35, 35, 35)))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(stocked)))))
+                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -246,7 +268,7 @@ public class Reports extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50))
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(ReturntoMain, javax.swing.GroupLayout.Alignment.TRAILING)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -269,13 +291,82 @@ public class Reports extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    // need code to return to main
-    
+       
+        
 
-// TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-public void connectBook()
+    private void ReturntoMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturntoMainActionPerformed
+          
+          MainFrame MF = new MainFrame();
+          MF.main(null);
+
+    }//GEN-LAST:event_ReturntoMainActionPerformed
+
+    public void startJlist()
+    {try {
+             
+
+             
+             
+connectBook();
+DatabaseMetaData meta = connect.getMetaData();
+ ResultSet res = meta.getTables(null, null, null, 
+new String[] {"TABLE"});
+
+while (res.next()) {
+//Vector<String> temp = new Vector<String>();
+//while (res.next()) {
+//temp.add(res.getString("AccName"));
+tableNames.addElement(res.getString("TABLE_NAME"));
+
+
+ //tablelist.setModel(temp);
+
+}
+
+
+res.close();
+
+//             ResultSet rs = searchstatement.executeQuery("SELECT table_name FROM all_tables");
+//                   
+//             
+//             table.setModel(DbUtils.resultSetToTableModel(rs));
+//             
+//             while ( rs.next() ) {
+//                 
+//
+//                 int count = rs.getInt("count");
+//                 String  Burger_ID = rs.getString("Burger_ID");
+//                 
+                
+                 
+                // closeConnect();
+                 
+                 
+                 
+                 
+                 
+                 
+        
+                                          
+         } 
+     catch (SQLException ex)
+     {
+             Logger.getLogger(Reports.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    tablelist.addListSelectionListener(new ListSelectionListener(){
+        public void valueChanged(ListSelectionEvent e) {
+            if (e.getValueIsAdjusting()){
+            final List<String> selectedValuesList;
+                selectedValuesList = tablelist.getSelectedValuesList();
+           fillTableSelected();
+        
+        }
+        }
+    });
+  
+    
+    }
+    public void connectBook()
 {
      try {
 Class.forName(DataBase);
@@ -288,28 +379,33 @@ searchstatement = connect.createStatement();
              Logger.getLogger(Reports.class.getName()).log(Level.SEVERE, null, ex);
          }
 }
+    
 public void closeConnect ()
 {
          try {
-             rs.close();
+               rs.close();
+              // res.close();
              searchstatement.close();
              connect.close();
          } catch (SQLException ex) {
              Logger.getLogger(Reports.class.getName()).log(Level.SEVERE, null, ex);
          }
 }
-    private void soldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soldActionPerformed
- try {
-             
+ private void createNewTableModel()  {
+    table.setModel(DbUtils.resultSetToTableModel(rs));
+  }
 
-             connectBook();
-
-             ResultSet rs = searchstatement.executeQuery("Select * from burgers ");
-                   
+ public void fillTableSelected ()
+ {try {
              
+String selected = tablelist.getSelectedValue();
+
+           ResultSet rs = searchstatement.executeQuery("Select * from " + selected);
+                              
              table.setModel(DbUtils.resultSetToTableModel(rs));
              
              while ( rs.next() ) {
+                 
 
                  int count = rs.getInt("count");
                  String  Burger_ID = rs.getString("Burger_ID");
@@ -320,15 +416,60 @@ public void closeConnect ()
                  
                  
                  
-                 
+             }        
                  
                  
         
-    }                                        
+    //}                                        
+         } catch (SQLException ex) {
+             Logger.getLogger(Reports.class.getName()).log(Level.SEVERE, null, ex);
+         }
+ }
+    private void soldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soldActionPerformed
+ try {
+             
+String selected = tablelist.getSelectedValue();
+
+           ResultSet rs = searchstatement.executeQuery("Select * from " + selected);
+                              
+             table.setModel(DbUtils.resultSetToTableModel(rs));
+             
+             while ( rs.next() ) {
+                 
+
+                 int count = rs.getInt("count");
+                 String  Burger_ID = rs.getString("Burger_ID");
+                 
+                
+                 
+                 closeConnect();
+                 
+                 
+                 
+             }        
+                 
+                 
+        
+    //}                                        
          } catch (SQLException ex) {
              Logger.getLogger(Reports.class.getName()).log(Level.SEVERE, null, ex);
          }
     }//GEN-LAST:event_soldActionPerformed
+
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+//          try {
+//            rs.acceptChanges();
+//          } 
+//          catch (SQLException sqle) {
+//            
+//              // Now revert back changes
+//              createNewTableModel();
+//          }
+//        
+      
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -366,9 +507,9 @@ public void closeConnect ()
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ReturntoMain;
     private javax.swing.JCheckBox all;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
@@ -377,7 +518,6 @@ public void closeConnect ()
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -387,5 +527,6 @@ public void closeConnect ()
     private javax.swing.JCheckBox sold;
     private javax.swing.JCheckBox stocked;
     private javax.swing.JTable table;
+    private javax.swing.JList<String> tablelist;
     // End of variables declaration//GEN-END:variables
 }
