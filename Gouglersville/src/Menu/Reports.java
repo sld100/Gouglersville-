@@ -33,7 +33,7 @@ import javax.swing.event.TableModelListener;
  *
  * @author levat_000
  */
-public class Reports extends javax.swing.JFrame 
+public class Reports extends javax.swing.JFrame implements TableModelListener
 {
  //String [] listModel ={ "Appetizers", "burgers", "Fries", "ect.."} ;
  private static final String DataBase = "org.sqlite.JDBC";
@@ -42,6 +42,10 @@ public class Reports extends javax.swing.JFrame
     Connection connect = null;
     Statement searchstatement = null;
     ListSelectionListener listSelectionListener;
+    
+    public static final int intKEYCOLUMN = 0;
+    
+    
     //{
     // @Override
     // public void valueChanged(ListSelectionEvent e) {
@@ -403,7 +407,7 @@ String selected = tablelist.getSelectedValue();
            ResultSet rs = searchstatement.executeQuery("Select * from " + selected);
                               
              table.setModel(DbUtils.resultSetToTableModel(rs));
-             
+             table.getModel().addTableModelListener(this);
              while ( rs.next() ) {
                  
 
@@ -529,4 +533,15 @@ String selected = tablelist.getSelectedValue();
     private javax.swing.JTable table;
     private javax.swing.JList<String> tablelist;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void tableChanged(TableModelEvent e) {
+        int row = e.getFirstRow();  
+        int column = e.getColumn();  
+        TableModel model = (TableModel)e.getSource();  
+        String strKey = (String) model.getValueAt(row, intKEYCOLUMN);
+        Object data = model.getValueAt(row, column);  
+        System.out.println("key = " + strKey + "   data = " + data);
+      
+    }
 }
