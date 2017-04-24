@@ -119,7 +119,7 @@ Reports RP = new Reports();
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(ReportsButton)
                             .addComponent(jLabel7))
-                        .addGap(289, 289, 289))
+                        .addGap(50, 50, 50))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton4)
                         .addGap(267, 267, 267))))
