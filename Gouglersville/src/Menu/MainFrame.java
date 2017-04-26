@@ -11,6 +11,8 @@ package Menu;
  */
 public class MainFrame extends javax.swing.JFrame {
 Reports RP = new Reports();
+Inventory IN = new Inventory();
+Depleted DPT = new Depleted();
     /**
      * Creates new form MainFrame
      */
@@ -27,25 +29,13 @@ Reports RP = new Reports();
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        Title = new javax.swing.JLabel();
+        Logo = new javax.swing.JLabel();
         ReportsButton = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-
-        jButton5.setText("jButton5");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setText("jButton6");
+        DepletedStock = new javax.swing.JButton();
+        Restock = new javax.swing.JButton();
+        ExitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 51, 51));
@@ -53,15 +43,15 @@ Reports RP = new Reports();
         setPreferredSize(new java.awt.Dimension(500, 500));
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 153));
-        jPanel1.setMaximumSize(new java.awt.Dimension(500, 500));
-        jPanel1.setPreferredSize(new java.awt.Dimension(300, 300));
+        jPanel1.setMaximumSize(new java.awt.Dimension(400, 400));
+        jPanel1.setPreferredSize(new java.awt.Dimension(0, 0));
 
-        jLabel1.setBackground(new java.awt.Color(204, 204, 204));
-        jLabel1.setFont(new java.awt.Font("Algerian", 0, 36)); // NOI18N
-        jLabel1.setText("Gouglersville Fire Company");
-        jLabel1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(40, 129, 240)));
+        Title.setBackground(new java.awt.Color(204, 204, 204));
+        Title.setFont(new java.awt.Font("Algerian", 0, 36)); // NOI18N
+        Title.setText("Gouglersville Fire Company");
+        Title.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(40, 129, 240)));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Menu/testlogo.png"))); // NOI18N
+        Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Menu/testlogo.png"))); // NOI18N
 
         ReportsButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ReportsButton.setText("Run Reports");
@@ -72,30 +62,30 @@ Reports RP = new Reports();
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton2.setText("Update Depleted Stock");
-        jButton2.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(40, 129, 240)));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        DepletedStock.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        DepletedStock.setText("Update Depleted Stock");
+        DepletedStock.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(40, 129, 240)));
+        DepletedStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                DepletedStockActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton3.setText("Restock Inventory");
-        jButton3.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(40, 129, 240)));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Restock.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        Restock.setText("Restock Inventory");
+        Restock.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(40, 129, 240)));
+        Restock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                RestockActionPerformed(evt);
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton4.setText("Exit");
-        jButton4.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(40, 129, 240)));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        ExitButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        ExitButton.setText("Exit");
+        ExitButton.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(40, 129, 240)));
+        ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                ExitButtonActionPerformed(evt);
             }
         });
 
@@ -104,41 +94,41 @@ Reports RP = new Reports();
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(56, 56, 56)
-                        .addComponent(jButton3))
-                    .addComponent(jLabel1))
-                .addGap(0, 296, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(232, 232, 232)
+                        .addComponent(Logo))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(ExitButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ReportsButton)
-                            .addComponent(jLabel7))
-                        .addGap(50, 50, 50))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGap(267, 267, 267))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(DepletedStock)
+                        .addGap(18, 18, 18)
+                        .addComponent(Restock)
+                        .addGap(18, 18, 18)
+                        .addComponent(ReportsButton))
+                    .addComponent(Title))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86)
+                .addGap(26, 26, 26)
+                .addComponent(Title)
+                .addGap(34, 34, 34)
+                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
+                    .addComponent(DepletedStock)
+                    .addComponent(Restock)
                     .addComponent(ReportsButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
-                .addComponent(jButton4)
-                .addGap(67, 67, 67))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
+                .addComponent(ExitButton)
+                .addGap(34, 34, 34))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -147,7 +137,7 @@ Reports RP = new Reports();
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 907, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -161,26 +151,21 @@ Reports RP = new Reports();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-System.exit(0);        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitButtonActionPerformed
+        System.exit(0);        // TODO add your handling code here:
+    }//GEN-LAST:event_ExitButtonActionPerformed
+
+    private void RestockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RestockActionPerformed
+        IN.main(null);
+    }//GEN-LAST:event_RestockActionPerformed
+
+    private void DepletedStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepletedStockActionPerformed
+        DPT.main(null);        // TODO add your handling code here:
+    }//GEN-LAST:event_DepletedStockActionPerformed
 
     private void ReportsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReportsButtonActionPerformed
- RP.main(null);
+        RP.main(null);
     }//GEN-LAST:event_ReportsButtonActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-// need code to run Invemtory Stocking  & color change for inventory screen 
-// TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//need code for depleted inventory and color change to inventory screen         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,15 +203,12 @@ System.exit(0);        // TODO add your handling code here:
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton DepletedStock;
+    private javax.swing.JButton ExitButton;
+    private javax.swing.JLabel Logo;
     private javax.swing.JButton ReportsButton;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JButton Restock;
+    private javax.swing.JLabel Title;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPopupMenu jPopupMenu1;
     // End of variables declaration//GEN-END:variables
 }
