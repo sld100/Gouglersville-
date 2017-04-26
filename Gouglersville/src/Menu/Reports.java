@@ -97,8 +97,8 @@ tablelist.addListSelectionListener(listSelectionListener);
         tablelist = new javax.swing.JList<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        startDate = new javax.swing.JFormattedTextField();
+        endDate = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         ReturntoMain = new javax.swing.JButton();
@@ -139,9 +139,14 @@ tablelist.addListSelectionListener(listSelectionListener);
 
         all.setText("Curent on Hand");
 
-        stocked.setText("Stocked Items");
+        stocked.setText("Depleted Reports");
+        stocked.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stockedActionPerformed(evt);
+            }
+        });
 
-        sold.setText("Sold Items");
+        sold.setText("Inventory Reports");
         sold.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 soldActionPerformed(evt);
@@ -168,11 +173,9 @@ tablelist.addListSelectionListener(listSelectionListener);
         jTextArea1.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(40, 129, 240)));
         jScrollPane3.setViewportView(jTextArea1);
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        jFormattedTextField1.setText("11/11/11");
+        startDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
 
-        jFormattedTextField2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        jFormattedTextField2.setText("11/11/11");
+        endDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy-MM-dd"))));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Report End Date");
@@ -236,11 +239,11 @@ tablelist.addListSelectionListener(listSelectionListener);
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(26, 26, 26)
-                                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(57, 57, 57)
                         .addComponent(jLabel5)
                         .addGap(47, 47, 47)
-                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -261,9 +264,9 @@ tablelist.addListSelectionListener(listSelectionListener);
                             .addComponent(all))
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,53 +309,22 @@ tablelist.addListSelectionListener(listSelectionListener);
     }//GEN-LAST:event_ReturntoMainActionPerformed
 
     public void startJlist()
-    {try {
-             
+{
 
-             
-             
+try
+{
+
 connectBook();
 DatabaseMetaData meta = connect.getMetaData();
- ResultSet res = meta.getTables(null, null, null, 
+ResultSet res = meta.getTables(null, null, "%",
 new String[] {"TABLE"});
-
-while (res.next()) {
-//Vector<String> temp = new Vector<String>();
-//while (res.next()) {
-//temp.add(res.getString("AccName"));
+while (res.next())
+{
 tableNames.addElement(res.getString("TABLE_NAME"));
-
-
- //tablelist.setModel(temp);
-
 }
-
-
 res.close();
-
-//             ResultSet rs = searchstatement.executeQuery("SELECT table_name FROM all_tables");
-//                   
-//             
-//             table.setModel(DbUtils.resultSetToTableModel(rs));
-//             
-//             while ( rs.next() ) {
-//                 
-//
-//                 int count = rs.getInt("count");
-//                 String  Burger_ID = rs.getString("Burger_ID");
-//                 
-                
-                 
-                // closeConnect();
-                 
-                 
-                 
-                 
-                 
-                 
-        
-                                          
-         } 
+                                        
+ } 
      catch (SQLException ex)
      {
              Logger.getLogger(Reports.class.getName()).log(Level.SEVERE, null, ex);
@@ -404,7 +376,8 @@ public void closeConnect ()
              
 String selected = tablelist.getSelectedValue();
 
-           ResultSet rs = searchstatement.executeQuery("Select * from " + selected);
+           ResultSet rs = searchstatement.executeQuery("SELECT * from " + selected );
+                  // + "Select column 1, column 2, column 3, column 4 from " + selected);
                               
              table.setModel(DbUtils.resultSetToTableModel(rs));
              table.getModel().addTableModelListener(this);
@@ -429,12 +402,20 @@ String selected = tablelist.getSelectedValue();
              Logger.getLogger(Reports.class.getName()).log(Level.SEVERE, null, ex);
          }
  }
+ 
     private void soldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_soldActionPerformed
- try {
+        String fromDate = startDate.getText();
+        String toDate = endDate.getText();
+        if (endDate.getText().equals("") )
+            {
+                toDate=fromDate;
+        System.out.println(toDate + fromDate);
+            }
+        try {
              
-String selected = tablelist.getSelectedValue();
+//String selected = tablelist.getSelectedValue();
 
-           ResultSet rs = searchstatement.executeQuery("Select * from " + selected);
+           ResultSet rs = searchstatement.executeQuery("SELECT * FROM Truck_In WHERE   Date >= '" + fromDate +"' AND Date   <= '" + toDate+ "'");
                               
              table.setModel(DbUtils.resultSetToTableModel(rs));
              
@@ -475,6 +456,10 @@ String selected = tablelist.getSelectedValue();
       
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void stockedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stockedActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -513,12 +498,11 @@ String selected = tablelist.getSelectedValue();
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ReturntoMain;
     private javax.swing.JCheckBox all;
+    private javax.swing.JFormattedTextField endDate;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -529,6 +513,7 @@ String selected = tablelist.getSelectedValue();
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JCheckBox sold;
+    private javax.swing.JFormattedTextField startDate;
     private javax.swing.JCheckBox stocked;
     private javax.swing.JTable table;
     private javax.swing.JList<String> tablelist;
@@ -542,6 +527,28 @@ String selected = tablelist.getSelectedValue();
         String strKey = (String) model.getValueAt(row, intKEYCOLUMN);
         Object data = model.getValueAt(row, column);  
         System.out.println("key = " + strKey + "   data = " + data);
-      
+  
+            
+     try {
+         int it = searchstatement.executeUpdate("UPDATE BURGERS SET ONHAND =" +data+ " WHERE BURGER_ID ='"+ strKey+ "';");
+     } catch (SQLException ex) {
+         Logger.getLogger(Reports.class.getName()).log(Level.SEVERE, null, ex);
+     }
+            
+
+//            ResultSet rs = stmt.executeQuery( 
+//            "select price, title from titles where title like '%Visual Basic%';" );
+//
+//            while ( rs.next() ) {
+//                String  title = rs.getString("title");
+//                int price = rs.getInt("price");
+//               
+//                jTextArea1.append("    title = " + title+ "    price = " + price+  "\n");
+//            }
+//            rs.close();
+//            stmt.close();
+//            c.close();UPDATE Burgers
+//  SET OnHand = data
+//  WHERE EMPNO = strKey;
     }
 }

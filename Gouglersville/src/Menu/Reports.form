@@ -119,13 +119,13 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                  <Component id="jFormattedTextField1" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <Component id="startDate" min="-2" pref="85" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                          <Component id="jFormattedTextField2" min="-2" pref="74" max="-2" attributes="0"/>
+                          <Component id="endDate" min="-2" pref="74" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -152,9 +152,9 @@
                           </Group>
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jFormattedTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="endDate" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jFormattedTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="startDate" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -225,12 +225,15 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="stocked">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Stocked Items"/>
+            <Property name="text" type="java.lang.String" value="Depleted Reports"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stockedActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="sold">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Sold Items"/>
+            <Property name="text" type="java.lang.String" value="Inventory Reports"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="soldActionPerformed"/>
@@ -294,20 +297,18 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField1">
+        <Component class="javax.swing.JFormattedTextField" name="startDate">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format subtype="1" type="1"/>
+              <Format format="yyyy-MM-dd" subtype="-1" type="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="11/11/11"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField2">
+        <Component class="javax.swing.JFormattedTextField" name="endDate">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format subtype="1" type="1"/>
+              <Format format="yyyy-MM-dd" subtype="-1" type="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="11/11/11"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
