@@ -42,20 +42,18 @@ Depleted DPT = new Depleted();
         setMaximumSize(new java.awt.Dimension(3000, 3000));
         setPreferredSize(new java.awt.Dimension(500, 500));
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 153));
         jPanel1.setMaximumSize(new java.awt.Dimension(400, 400));
         jPanel1.setPreferredSize(new java.awt.Dimension(0, 0));
 
         Title.setBackground(new java.awt.Color(204, 204, 204));
-        Title.setFont(new java.awt.Font("Algerian", 0, 36)); // NOI18N
+        Title.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         Title.setText("Gouglersville Fire Company");
-        Title.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(40, 129, 240)));
 
         Logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Menu/testlogo.png"))); // NOI18N
 
         ReportsButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ReportsButton.setText("Run Reports");
-        ReportsButton.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(40, 129, 240)));
+        ReportsButton.setBorder(null);
         ReportsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ReportsButtonActionPerformed(evt);
@@ -64,7 +62,7 @@ Depleted DPT = new Depleted();
 
         DepletedStock.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         DepletedStock.setText("Update Depleted Stock");
-        DepletedStock.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(40, 129, 240)));
+        DepletedStock.setBorder(null);
         DepletedStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 DepletedStockActionPerformed(evt);
@@ -73,7 +71,7 @@ Depleted DPT = new Depleted();
 
         Restock.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Restock.setText("Restock Inventory");
-        Restock.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(40, 129, 240)));
+        Restock.setBorder(null);
         Restock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RestockActionPerformed(evt);
@@ -82,7 +80,7 @@ Depleted DPT = new Depleted();
 
         ExitButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         ExitButton.setText("Exit");
-        ExitButton.setBorder(javax.swing.BorderFactory.createMatteBorder(3, 3, 3, 3, new java.awt.Color(40, 129, 240)));
+        ExitButton.setBorder(null);
         ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ExitButtonActionPerformed(evt);
@@ -94,41 +92,40 @@ Depleted DPT = new Depleted();
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap(93, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(232, 232, 232)
-                        .addComponent(Logo))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(ExitButton)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(DepletedStock)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(DepletedStock, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(77, 77, 77)
+                                .addComponent(Restock, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(88, 88, 88)
+                                .addComponent(ReportsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Title, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
-                        .addComponent(Restock)
-                        .addGap(18, 18, 18)
-                        .addComponent(ReportsButton))
-                    .addComponent(Title))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(Logo)))
+                .addGap(0, 30, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(Title)
-                .addGap(34, 34, 34)
-                .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DepletedStock)
-                    .addComponent(Restock)
-                    .addComponent(ReportsButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
-                .addComponent(ExitButton)
-                .addGap(34, 34, 34))
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Logo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ExitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(Title)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(DepletedStock, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(Restock, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ReportsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(234, 234, 234))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -137,7 +134,7 @@ Depleted DPT = new Depleted();
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 902, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(

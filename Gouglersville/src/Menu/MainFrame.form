@@ -34,7 +34,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" pref="547" max="32767" attributes="0"/>
+              <Component id="jPanel1" pref="902" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -52,9 +52,6 @@
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="99" green="cc" red="ff" type="rgb"/>
-        </Property>
         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[400, 400]"/>
         </Property>
@@ -67,50 +64,50 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="232" max="-2" attributes="0"/>
+                  <EmptySpace pref="93" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="ExitButton" min="-2" pref="111" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="DepletedStock" min="-2" pref="188" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                                  <Component id="Restock" min="-2" pref="155" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                                  <Component id="ReportsButton" min="-2" pref="127" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="Title" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="Logo" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                          <Component id="ExitButton" min="-2" max="-2" attributes="0"/>
-                      </Group>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="DepletedStock" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="Restock" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="ReportsButton" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="Title" alignment="0" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="30" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                  <Component id="Title" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                  <Component id="Logo" min="-2" pref="114" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="DepletedStock" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Restock" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="ReportsButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="Logo" min="-2" pref="114" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="ExitButton" min="-2" pref="46" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <Component id="Title" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="170" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="DepletedStock" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
+                              <Component id="Restock" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
+                              <Component id="ReportsButton" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="234" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="174" max="32767" attributes="0"/>
-                  <Component id="ExitButton" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -122,16 +119,9 @@
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Algerian" size="36" style="0"/>
+              <Font name="Tahoma" size="48" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Gouglersville Fire Company"/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                <MatteColorBorder>
-                  <Color PropertyName="color" blue="f0" green="81" red="28" type="rgb"/>
-                </MatteColorBorder>
-              </Border>
-            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="Logo">
@@ -148,11 +138,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Run Reports"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                <MatteColorBorder bottom="3" left="3" right="3" top="3">
-                  <Color PropertyName="color" blue="f0" green="81" red="28" type="rgb"/>
-                </MatteColorBorder>
-              </Border>
+              <Border info="null"/>
             </Property>
           </Properties>
           <Events>
@@ -166,11 +152,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Update Depleted Stock"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                <MatteColorBorder bottom="3" left="3" right="3" top="3">
-                  <Color PropertyName="color" blue="f0" green="81" red="28" type="rgb"/>
-                </MatteColorBorder>
-              </Border>
+              <Border info="null"/>
             </Property>
           </Properties>
           <Events>
@@ -184,11 +166,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Restock Inventory"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                <MatteColorBorder bottom="3" left="3" right="3" top="3">
-                  <Color PropertyName="color" blue="f0" green="81" red="28" type="rgb"/>
-                </MatteColorBorder>
-              </Border>
+              <Border info="null"/>
             </Property>
           </Properties>
           <Events>
@@ -202,11 +180,7 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Exit"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.MatteColorBorderInfo">
-                <MatteColorBorder bottom="3" left="3" right="3" top="3">
-                  <Color PropertyName="color" blue="f0" green="81" red="28" type="rgb"/>
-                </MatteColorBorder>
-              </Border>
+              <Border info="null"/>
             </Property>
           </Properties>
           <Events>
